@@ -2,6 +2,7 @@ import UserModel from "../models/Users.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import BlackListTokenModel from "../models/blacklist.model.js";
 dotenv.config();
 
 /**
@@ -102,4 +103,49 @@ async function loginUserController(req, res) {
   });
 }
 
-export { registerUserController, loginUserController };
+/**
+ * @name logoutUserController
+ * @description clear token from the cookie and add token in the black list
+ * @access Public
+ */
+async function logoutUserController(req, res) {
+  const token = req.cookies.token;
+  if (token) {
+    await BlackListTokenModel.create({ token });
+  }
+
+  res.clearCookie("token");
+
+  res.status(200).json({
+    msg: "User logged out successfully",
+  });
+}
+
+/**
+ * @name getMeController
+ * @description gives logged in user details
+ * @access Private
+ */
+async function getMeController(req, res) {
+  // const { payload } = req.user;
+  // const userDetails = await UserModel.findById(payload.id);
+
+  // req.user.id ----------------> is from payload that we have saved during the middleware
+  const userDetails = await UserModel.findById(req.user.id);
+
+  res.status(200).json({
+    msg: "User details fetched successfully",
+    userDetails: {
+      id: userDetails._id,
+      username: userDetails.username,
+      email: userDetails.email,
+    },
+  });
+}
+
+export {
+  registerUserController,
+  loginUserController,
+  logoutUserController,
+  getMeController,
+};
