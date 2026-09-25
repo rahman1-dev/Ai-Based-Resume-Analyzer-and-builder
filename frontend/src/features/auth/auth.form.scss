@@ -1,0 +1,40 @@
+main {
+  min-height: 100vh;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .form-container {
+    min-width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    input {
+      border: none;
+      outline: none;
+      padding: 0.5rem 0.45rem;
+      font-size: 1rem;
+      border-radius: 0.75rem;
+    }
+  }
+}
+
+main a {
+  text-decoration: none;
+  color: rgb(194, 9, 70);
+}

@@ -35,6 +35,6 @@ authRouter.get("/logout", logoutUserController);
  * @description get the current logedIn user details
  * @access Private
  */
-authRouter.get("/get-me", authMiddlewar, getMeController);
+authRouter.get("/get-me", authMiddlewar, getMeConctroller);
 
 export default authRouter;
