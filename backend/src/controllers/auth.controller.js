@@ -135,7 +135,7 @@ async function getMeController(req, res) {
 
   res.status(200).json({
     msg: "User details fetched successfully",
-    userDetails: {
+    user: {
       id: userDetails._id,
       username: userDetails.username,
       email: userDetails.email,
