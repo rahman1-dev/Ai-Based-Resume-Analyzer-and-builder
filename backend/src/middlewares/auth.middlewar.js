@@ -22,7 +22,7 @@ async function authMiddlewar(req, res, next) {
   }
 
   try {
-    const payload = await jwt.verify(token, process.env.JWT_SECRET);
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
 
     req.user = payload;
 
