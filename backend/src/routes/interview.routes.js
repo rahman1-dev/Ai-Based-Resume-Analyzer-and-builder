@@ -1,7 +1,8 @@
 import express from "express";
 import { Router } from "express";
-import authMiddlewar from "../middlewares/auth.middlewar";
-import interviewController from "../controllers/interview.controller";
+import authMiddlewar from "../middlewares/auth.middlewar.js";
+import interviewController from "../controllers/interview.controller.js";
+import upload from "../middlewares/file.middleware.js";
 
 const interviewRouter = Router();
 
@@ -13,7 +14,8 @@ const interviewRouter = Router();
 interviewRouter.post(
   "/",
   authMiddlewar,
-  interviewController.generateInterviewReportController,
+  upload.single("resume"),
+  interviewController,
 );
 
 export default interviewRouter;
