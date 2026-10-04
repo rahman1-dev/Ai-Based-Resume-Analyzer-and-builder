@@ -166,7 +166,7 @@ const interviewReportSchema = {
         required: ["day", "focus", "tasks"],
       },
     },
-    title: { type: Type.STRING },
+    title: { type: Type.STRING , description: "The title of the job for which the interview report is generated"},
   },
   required: [
     "matchScore",
