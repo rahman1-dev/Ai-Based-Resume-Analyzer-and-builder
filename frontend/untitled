@@ -1,0 +1,91 @@
+{
+  _id: ObjectId('6abece967dd5b34d3dcc52da'),
+  matchScore: NumberInt('88'),
+  technicalQuestions: [
+    {
+      question: 'How do you handle state management in a complex React application, and how does your approach change when integrating real-time GenAI streaming responses?',
+      intention: 'To evaluate the candidate\'s depth of React knowledge and their practical experience with GenAI integration challenges like streaming.',
+      answer: 'The candidate should discuss hooks like useReducer or libraries like Redux/Zustand for global state, and specifically mention handling chunks of data via WebStreams or Server-Sent Events (SSE) when working with Gemini/OpenAI APIs.'
+    },
+    {
+      question: 'Can you explain the security considerations when implementing JWT-based authentication in a Node.js/Express environment?',
+      intention: 'To verify the candidate\'s understanding of backend security, which is a key requirement in the job description.',
+      answer: 'Expected answer includes token expiration strategies, secure storage (HttpOnly cookies), refresh tokens, and preventing common attacks like XSS or CSRF.'
+    },
+    {
+      question: 'How would you design a MongoDB schema for an AI-powered platform where users have multiple resumes and each resume has multiple analysis reports?',
+      intention: 'To assess database design skills and understanding of one-to-many relationships in a NoSQL context.',
+      answer: 'The candidate should explain the choice between embedding documents (for performance) versus referencing (for scalability/size limits) based on the expected growth of analysis data.'
+    }
+  ],
+  skillGaps: [
+    {
+      skill: 'TypeScript',
+      severity: 'medium'
+    },
+    {
+      skill: 'OAuth 2.0',
+      severity: 'low'
+    },
+    {
+      skill: 'Automated Testing (Jest/Playwright)',
+      severity: 'high'
+    },
+    {
+      skill: 'CI/CD Pipelines',
+      severity: 'medium'
+    }
+  ],
+  preparationPlan: [
+    {
+      day: NumberInt('1'),
+      focus: 'TypeScript Fundamentals',
+      tasks: [
+        'Learn core TypeScript concepts like Interfaces, Types, and Generics',
+        'Refactor a small React component from JS to TS'
+      ],
+      _id: ObjectId('6abece967dd5b34d3dcc52db')
+    },
+    {
+      day: NumberInt('2'),
+      focus: 'Authentication & Security',
+      tasks: [
+        'Study OAuth 2.0 flows (Authorization Code vs. Implicit)',
+        'Implement a simple Passport.js strategy for Social Login'
+      ],
+      _id: ObjectId('6abece967dd5b34d3dcc52dc')
+    },
+    {
+      day: NumberInt('3'),
+      focus: 'Testing Frameworks',
+      tasks: [
+        'Write unit tests for Express controllers using Jest and Supertest',
+        'Explore Playwright basics for end-to-end testing'
+      ],
+      _id: ObjectId('6abece967dd5b34d3dcc52dd')
+    },
+    {
+      day: NumberInt('4'),
+      focus: 'DevOps & CI/CD',
+      tasks: [
+        'Set up a GitHub Action to run tests on every push',
+        'Review AWS ECS and Lambda basics for deploying containerized apps'
+      ],
+      _id: ObjectId('6abece967dd5b34d3dcc52de')
+    },
+    {
+      day: NumberInt('5'),
+      focus: 'Advanced MongoDB & Final Review',
+      tasks: [
+        'Practice MongoDB Aggregation Framework queries',
+        'Review GenAI prompt engineering best practices for production'
+      ],
+      _id: ObjectId('6abece967dd5b34d3dcc52df')
+    }
+  ],
+  user: ObjectId('6ab1cd84c36e18ecbc3cf255'),
+  behavirolQuestions: [],
+  createdAt: ISODate('2026-10-01T21:20:22.988Z'),
+  updatedAt: ISODate('2026-10-01T21:20:22.988Z'),
+  __v: NumberInt('0')
+}
