@@ -93,7 +93,7 @@ async function getAllInterviewReport(req, res) {
   });
 }
 
-export {
+export default {
   generateInterviewReportController,
   getInterviewReportByIdController,
   getAllInterviewReport,

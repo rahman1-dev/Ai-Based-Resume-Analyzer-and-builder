@@ -7,7 +7,7 @@ import upload from "../middlewares/file.middleware.js";
 const interviewRouter = Router();
 
 /**
- * @route POST api/interview
+ * @route POST jobDescription
  * @description generate the interview report on the basis of user's self description, job description, resume pdf
  * @access Private
  */
@@ -15,7 +15,7 @@ interviewRouter.post(
   "/",
   authMiddlewar,
   upload.single("resume"),
-  interviewController,
+  interviewController.generateInterviewReportController,
 );
 
 /**
@@ -26,7 +26,7 @@ interviewRouter.post(
 interviewRouter.get(
   "/report/:interviewId",
   authMiddlewar,
-  getInterviewReportByIdController,
+  interviewController.getInterviewReportByIdController,
 );
 
 /**
@@ -34,6 +34,6 @@ interviewRouter.get(
  * @description get all the interview reports of the logged in user
  * @access Private
  */
-interviewRouter.get('/',authMiddlewar,getAllInterviewReport)
+interviewRouter.get("/", authMiddlewar, interviewController.getAllInterviewReport);
 
 export default interviewRouter;

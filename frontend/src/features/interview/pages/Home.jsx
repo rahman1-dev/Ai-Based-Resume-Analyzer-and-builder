@@ -1,7 +1,61 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "../style/home.scss";
+import { useInterview } from "../hooks/useInteview";
+import { useNavigate } from "react-router";
 
 const Home = () => {
+  const { loading, generateReport } = useInterview();
+  const navigate = useNavigate();
+  const [jobDescription, setJobDescription] = useState("");
+  const [selfDescription, setSelfDescription] = useState("");
+  const resumeInputRef = useRef();
+  const [error, setError] = useState("");
+
+  const handleGeneratReport = async () => {
+    setError("");
+
+    const resumeFile = resumeInputRef?.current?.files?.[0];
+
+    if (!jobDescription.trim()) {
+      setError("Please enter the target job description.");
+      return;
+    }
+    if (!resumeFile) {
+      setError("Please upload a PDF resume.");
+      return;
+    }
+
+    try {
+      const data = await generateReport({
+        jobDescription,
+        selfDescription,
+        resumeFile,
+      });
+
+      if (!data?._id) {
+        throw new Error("The server did not return an interview report.");
+      }
+
+      navigate(`/interview/${data._id}`);
+    } catch (error) {
+      console.error("Could not generate interview report:", error);
+
+      setError(
+        requestError.response?.data?.msg ||
+          requestError.message ||
+          "Could not generate the interview report. Please try again.",
+      );
+    }
+  };
+
+  if (loading) {
+    return (
+      <main>
+        <h1>Loading yout Interview plan....</h1>
+      </main>
+    );
+  }
+
   return (
     <main className="home">
       <header className="interview-header">
@@ -40,6 +94,10 @@ const Home = () => {
                 Target job description
               </label>
               <textarea
+                onChange={(e) => {
+                  setJobDescription(e.target.value);
+                }}
+                value={jobDescription}
                 id="jobDescription"
                 name="jobDescription"
                 maxLength={5000}
@@ -90,7 +148,8 @@ const Home = () => {
                 type="file"
                 name="resume"
                 id="resume"
-                accept=".pdf,.doc,.docx"
+                accept=".pdf"
+                ref={resumeInputRef}
               />
             </div>
 
@@ -103,6 +162,10 @@ const Home = () => {
             <div className="self-description-field">
               <label htmlFor="selfDescription">Quick Self-Description</label>
               <textarea
+                onChange={(e) => {
+                  setSelfDescription(e.target.value);
+                }}
+                value={selfDescription}
                 name="selfDescription"
                 id="selfDescription"
                 maxLength={2000}
@@ -111,11 +174,7 @@ const Home = () => {
             </div>
 
             <div className="requirement-note">
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
+              <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M10 1.67a8.33 8.33 0 1 0 0 16.66 8.33 8.33 0 0 0 0-16.66Zm0 3.75a1.04 1.04 0 1 1 0 2.08 1.04 1.04 0 0 1 0-2.08Zm1.04 9.16H8.96v-1.25h.42V9.58h-.42V8.33h1.66v5h.42v1.25Z" />
               </svg>
               <p>
@@ -129,10 +188,15 @@ const Home = () => {
 
         <footer className="interview-card-footer">
           <p>AI-Powered Strategy Generation · Approx 30s</p>
-          <button className="button primary-button" type="button">
+          <button
+            onClick={handleGeneratReport}
+            className="button primary-button"
+            type="button"
+          >
             <span aria-hidden="true">★</span>
             Generate My Interview Strategy
           </button>
+          {error && <p role="alert">{error}</p>}
         </footer>
       </section>
     </main>
