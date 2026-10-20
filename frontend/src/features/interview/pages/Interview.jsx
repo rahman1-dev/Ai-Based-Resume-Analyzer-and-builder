@@ -130,7 +130,9 @@ const RoadMapDay = ({ day }) => (
 // ── Main Component ────────────────────────────────────────────────────────────
 const Interview = () => {
   const [activeNav, setActiveNav] = useState("technical");
-  const { report, generateReport,getReportByInterviewId, loading, getResumePdf } = useInterview();
+  const { report, generateReport, getReportByInterviewId, loading } =
+    useInterview();
+
   const { interviewId } = useParams();
 
   useEffect(() => {
@@ -216,7 +218,8 @@ const Interview = () => {
               <div className="content-header">
                 <h2>Behavioral Questions</h2>
                 <span className="content-header__count">
-                  {report.behavioralQuestions.length} questions
+                  {/* {report.behavioralQuestions.length} questions */}
+                  questions
                 </span>
               </div>
               <div className="q-list">

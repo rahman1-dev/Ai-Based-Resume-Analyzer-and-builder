@@ -1,13 +1,15 @@
 import { InterviewContext, InterviewProvider } from "../interview.context";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import {
   generateInterviewReport,
   getInterviewReportById,
   getAllInterviewReport,
 } from "../services/interview.api";
+import { useParams } from "react-router";
 
 export const useInterview = () => {
   const context = useContext(InterviewContext);
+  const { interviewId } = useParams();
 
   if (!context) {
     throw new Error(
@@ -64,6 +66,14 @@ export const useInterview = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (interviewId) {
+      getInterviewReportById(interviewId);
+    } else {
+      getAllReports();
+    }
+  }, [interviewId]);
 
   return {
     loading,

@@ -57,7 +57,7 @@ const TechnicalQuestionsSchema = new mongoose.Schema(
   },
 );
 
-const BehavirolQuestionsSchema = new mongoose.Schema(
+const BehavioralQuestionsSchema = new mongoose.Schema(
   {
     question: {
       type: String,
@@ -129,7 +129,7 @@ const InterviewReportSchema = new mongoose.Schema(
       max: 100,
     },
     technicalQuestions: [TechnicalQuestionsSchema],
-    behavirolQuestions: [BehavirolQuestionsSchema],
+    behavioralQuestions: [BehavioralQuestionsSchema],
     skillGaps: [SkillGapsSchema],
     preparationPlan: [PriparationPlanSchema],
     user: {

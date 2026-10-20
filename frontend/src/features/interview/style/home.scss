@@ -123,7 +123,9 @@
     font-size: 0.82rem;
     line-height: 1.55;
     resize: vertical;
-    transition: border-color 150ms ease, box-shadow 150ms ease;
+    transition:
+      border-color 150ms ease,
+      box-shadow 150ms ease;
 
     &::placeholder {
       color: #9399aa;
@@ -168,7 +170,9 @@
     background: #202637;
     cursor: pointer;
     text-align: center;
-    transition: border-color 150ms ease, background-color 150ms ease;
+    transition:
+      border-color 150ms ease,
+      background-color 150ms ease;
 
     &:hover {
       border-color: #f32370;
@@ -295,7 +299,9 @@
       background: #f20d65;
       font-size: 0.82rem;
       font-weight: 700;
-      transition: background-color 150ms ease, transform 100ms ease;
+      transition:
+        background-color 150ms ease,
+        transform 100ms ease;
 
       &:hover {
         background: #ff287c;
@@ -353,6 +359,105 @@
 
     .interview-card-footer .primary-button {
       width: 100%;
+    }
+  }
+
+  .recent-reports {
+    width: 100%;
+    max-width: 1060px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    > h2 {
+      color: #eef0f5;
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+
+    .reports-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+      gap: 14px;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      .report-item {
+        min-width: 0;
+        display: grid;
+        gap: 10px;
+        padding: 18px;
+        border: 1px solid #2c3340;
+        border-radius: 12px;
+        background: linear-gradient(145deg, #1b222d, #151a21 75%);
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
+        cursor: pointer;
+        transition:
+          border-color 160ms ease,
+          background-color 160ms ease,
+          box-shadow 160ms ease,
+          transform 160ms ease;
+
+        &:hover {
+          border-color: rgba(243, 35, 112, 0.55);
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+          transform: translateY(-2px);
+        }
+
+        h3 {
+          overflow-wrap: anywhere;
+          color: #f5f6fa;
+          font-size: 1rem;
+          font-weight: 650;
+          line-height: 1.4;
+        }
+
+        .report-meta {
+          color: #969ba7;
+          font-size: 0.78rem;
+          line-height: 1.5;
+        }
+
+        .match-score {
+          justify-self: start;
+          padding: 5px 9px;
+          border: 1px solid rgba(243, 35, 112, 0.24);
+          border-radius: 999px;
+          background: rgba(243, 35, 112, 0.1);
+          color: #f15b91;
+          font-size: 0.75rem;
+          font-weight: 650;
+          line-height: 1.3;
+
+          &.score--high {
+            border-color: rgba(76, 205, 145, 0.25);
+            background: rgba(76, 205, 145, 0.1);
+            color: #73d7a7;
+          }
+
+          &.score--mid {
+            border-color: rgba(255, 190, 74, 0.25);
+            background: rgba(255, 190, 74, 0.1);
+            color: #f3c66e;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 480px) {
+      gap: 12px;
+
+      .reports-list {
+        grid-template-columns: 1fr;
+        gap: 10px;
+
+        .report-item {
+          padding: 15px;
+        }
+      }
     }
   }
 }

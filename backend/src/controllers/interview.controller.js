@@ -79,7 +79,7 @@ async function getInterviewReportByIdController(req, res) {
 
 async function getAllInterviewReport(req, res) {
   const user = req.user.id;
-  const allInterviewReport = await InterviewReportModel.findOne({ user })
+  const allInterviewReport = await InterviewReportModel.find({ user })
     .sort({
       createdAt: -1,
     })
