@@ -13,12 +13,12 @@ export async function generateInterviewReport({
   selfDescription,
   jobDescription,
 }) {
-  console.log(
-    "Generating interview report....",
-    resumeFile,
-    selfDescription,
-    jobDescription,
-  );
+  // console.log(
+  //   "Generating interview report....",
+  //   resumeFile,
+  //   selfDescription,
+  //   jobDescription,
+  // );
 
   if (!jobDescription?.trim()) {
     throw new Error("A job description is required.");
@@ -68,4 +68,19 @@ export async function getAllInterviewReport() {
   } catch (error) {
     console.log(error);
   }
+}
+
+/**
+ * @description generate the resume pdf on the basis of user's self description, job description, resume
+ */
+export async function generateResumePdf({ interviewId }) {
+  const response = await api.post(
+    `/api/interview/resume/pdf/${interviewId}`,
+    null,
+    {
+      responseType: "blob",
+    },
+  );
+
+  return response.data;
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../style/interview.scss";
 import { useNavigate, useParams } from "react-router";
 import { useInterview } from "../hooks/useInteview.js";
+// import { generateResumePdf } from "../services/interview.api.js";
 
 const NAV_ITEMS = [
   {
@@ -130,8 +131,13 @@ const RoadMapDay = ({ day }) => (
 // ── Main Component ────────────────────────────────────────────────────────────
 const Interview = () => {
   const [activeNav, setActiveNav] = useState("technical");
-  const { report, generateReport, getReportByInterviewId, loading } =
-    useInterview();
+  const {
+    report,
+    generateReport,
+    getReportByInterviewId,
+    loading,
+    getResumePdf,
+  } = useInterview();
 
   const { interviewId } = useParams();
 
@@ -174,6 +180,7 @@ const Interview = () => {
               </button>
             ))}
           </div>
+
           <button
             onClick={() => {
               getResumePdf(interviewId);
