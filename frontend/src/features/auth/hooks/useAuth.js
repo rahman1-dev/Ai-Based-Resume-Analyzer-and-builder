@@ -49,7 +49,7 @@ export const useAuth = () => {
       try {
         const data = await getMe();
         setUser(data?.user);
-        console.log(data?.user);
+        // console.log(data?.user);
       } catch (error) {
         console.log(error);
       } finally {

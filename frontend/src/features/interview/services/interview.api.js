@@ -84,3 +84,16 @@ export async function generateResumePdf({ interviewId }) {
 
   return response.data;
 }
+
+/**
+ * @description logout the user by clearing the cookie and blacklisting the token
+ */
+export async function logoutUser() {
+  try {
+    const response = await api.get("/api/auth/logout");
+    // console.log("User logged out successfully:", response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -10,7 +10,11 @@
   color: #eef0f5;
 
   .interview-header {
+    position: relative;
+    width: min(100%, 1060px);
     text-align: center;
+    padding-top: 40px;
+    // background-color: yellow;
 
     h1 {
       font-size: clamp(1.65rem, 4vw, 2.45rem);
@@ -28,6 +32,146 @@
       color: #969ba7;
       font-size: 0.92rem;
       line-height: 1.55;
+    }
+  }
+
+  @at-root .logout-confirmation {
+    position: fixed;
+    z-index: 10;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(11, 15, 21, 0.82);
+    color: #eef0f5;
+
+    &__dialog {
+      width: min(100%, 400px);
+      padding: 26px;
+      border: 1px solid #262c36;
+      border-radius: 12px;
+      background: #151a21;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+      text-align: center;
+    }
+
+    &__icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 14px;
+      border: 1px solid rgba(243, 35, 112, 0.25);
+      border-radius: 50%;
+      background: rgba(243, 35, 112, 0.08);
+      color: #f15b91;
+
+      svg {
+        width: 19px;
+        height: 19px;
+      }
+    }
+
+    h2 {
+      font-size: 0.98rem;
+      font-weight: 650;
+    }
+
+    p {
+      margin-top: 8px;
+      color: #969ba7;
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+
+    &__actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    &__actions button {
+      min-width: 104px;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 8px;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 650;
+      cursor: pointer;
+
+      &:focus-visible {
+        outline: 2px solid #ff8bb6;
+        outline-offset: 3px;
+      }
+    }
+
+    &__cancel {
+      border: 1px solid #343b49;
+      background: #202637;
+      color: #eef0f5;
+
+      &:hover {
+        background: #272e3e;
+      }
+    }
+
+    &__confirm {
+      border: 1px solid #f32370;
+      background: #f32370;
+      color: #eef0f5;
+
+      &:hover {
+        background: #d91c61;
+      }
+    }
+
+    @media (max-width: 400px) {
+      &__dialog {
+        padding: 24px 20px;
+      }
+
+      &__actions button {
+        min-width: 0;
+        flex: 1;
+      }
+    }
+  }
+
+  .logout-button {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 10px;
+    border: 1px solid rgba(243, 35, 112, 0.35);
+    border-radius: 7px;
+    background: rgba(243, 35, 112, 0.08);
+    color: #f15b91;
+    font: inherit;
+    font-size: 0.75rem;
+    font-weight: 650;
+    cursor: pointer;
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease;
+
+    &:hover {
+      border-color: rgba(243, 35, 112, 0.65);
+      background: rgba(243, 35, 112, 0.16);
+    }
+
+    &:focus-visible {
+      outline: 2px solid #ff8bb6;
+      outline-offset: 3px;
+    }
+
+    svg {
+      width: 15px;
+      height: 15px;
     }
   }
 
@@ -338,6 +482,18 @@
   }
 
   @media (max-width: 480px) {
+    .interview-header {
+      display: flex;
+      flex-direction: column;
+      padding-top: 0;
+    }
+
+    .logout-button {
+      position: static;
+      align-self: flex-end;
+      margin-bottom: 10px;
+    }
+
     .interview-header p {
       font-size: 0.82rem;
     }

@@ -2,15 +2,16 @@ import React, { useRef, useState } from "react";
 import "../style/home.scss";
 import { useInterview } from "../hooks/useInteview";
 import { useNavigate } from "react-router";
+import { logoutUser } from "../services/interview.api.js";
 
 const Home = () => {
   const { loading, generateReport, reports } = useInterview();
-  console.log(reports);
   const navigate = useNavigate();
-  const [jobDescription, setJobDescription] = useState("");
   const [selfDescription, setSelfDescription] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
   const resumeInputRef = useRef();
   const [error, setError] = useState("");
+  const [ShowlogoutConfirmation, setShowLogoutConfirmation] = useState(false);
 
   const handleGeneratReport = async () => {
     setError("");
@@ -52,14 +53,42 @@ const Home = () => {
   if (loading) {
     return (
       <main>
-        <h1>Loading yout Interview plan....</h1>
+        <h1>Loading your Interview plan....</h1>
       </main>
+    );
+  }
+
+  if (ShowlogoutConfirmation) {
+    // console.log("logout btn clicked", ShowlogoutConfirmation);
+    return (
+      <LogoutConfirmation
+        setShowLogoutConfirmation={setShowLogoutConfirmation}
+      ></LogoutConfirmation>
     );
   }
 
   return (
     <main className="home">
       <header className="interview-header">
+        <button
+          className="logout-button"
+          type="button"
+          onClick={() => {
+            setShowLogoutConfirmation(true);
+          }}
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+          >
+            <path d="M10 17l5-5-5-5m5 5H3" />
+            <path d="M12 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5" />
+          </svg>
+          Logout
+        </button>
         <h1>
           Create Your Custom <span>Interview Plan</span>
         </h1>
@@ -227,6 +256,59 @@ const Home = () => {
           </ul>
         </section>
       )}
+    </main>
+  );
+};
+
+// ------Logout Cofirmation------
+export const LogoutConfirmation = ({ setShowLogoutConfirmation }) => {
+  const navigate = useNavigate();
+  return (
+    <main className="logout-confirmation">
+      <section
+        className="logout-confirmation__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="logout-confirmation-title"
+        aria-describedby="logout-confirmation-description"
+      >
+        <div className="logout-confirmation__icon" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+          >
+            <path d="M10 17l5-5-5-5m5 5H3" />
+            <path d="M12 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5" />
+          </svg>
+        </div>
+        <h2 id="logout-confirmation-title">Log out?</h2>
+        <p id="logout-confirmation-description">
+          You’ll need to sign in again to continue using your account.
+        </p>
+        <div className="logout-confirmation__actions">
+          <button
+            className="logout-confirmation__cancel"
+            type="button"
+            onClick={() => {
+              setShowLogoutConfirmation(false);
+            }}
+          >
+            Cancel
+          </button>
+          <button
+            className="logout-confirmation__confirm"
+            type="button"
+            onClick={() => {
+              logoutUser();
+              navigate("/login");
+            }}
+          >
+            Log out
+          </button>
+        </div>
+      </section>
     </main>
   );
 };
